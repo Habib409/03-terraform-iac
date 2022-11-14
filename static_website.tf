@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "frontend" {
-  bucket =  "glenn-demobucket"
-  acl = "public-read"
+  bucket = var.bucket_name
+  acl    = "public-read"
   policy = <<EOF
 {
   "Id": "bucket_policy_site",
@@ -9,10 +9,10 @@ resource "aws_s3_bucket" "frontend" {
     {
       "Sid": "bucket_policy_site_main",
       "Action": [
-        "s3:GetObject"
+      "s3:GetObject"
       ],
       "Effect": "Allow",
-      "Resource": "arn:aws:s3:::glenn-demobucket/*",
+      "Resource": "arn:aws:s3:::${var.bucket_name}/*",
       "Principal": "*"
     }
   ]
